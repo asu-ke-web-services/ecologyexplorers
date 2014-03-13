@@ -2,13 +2,14 @@
 
 $host = "localhost";
 $user = "root";
-$pass = "rootpassword";
-$db = "datamigration";
-$db2 = "ecologyexplorers_data";
+$pass = "root";
+$port = 8889;
+$db = "ecoexplorers_new"; # desitnation 
+$db2 = "ecoexplorers_old"; # source
 
 ini_set('max_execution_time', 60);
 
-$mysqli_temp = new mysqli($host, $user, $pass);
+$mysqli_temp = new mysqli($host, $user, $pass, $db, $port); 
 
 if (mysqli_connect_errno())
 {
@@ -19,11 +20,12 @@ $query = "CREATE DATABASE IF NOT EXISTS datamigration";
 $result = $mysqli_temp->query($query) or die($mysqli_temp->error.__LINE__);
 mysqli_close($mysqli_temp);
 
-$mysqli_old = new mysqli($host, $user, $pass,$db2);
-$mysqli_new = new mysqli($host, $user, $pass,$db);
+$mysqli_old = new mysqli($host, $user, $pass,$db2, $port);
+$mysqli_new = new mysqli($host, $user, $pass,$db , $port);
 
 echo "Connection established";?>
 <br>
+
 <?php
 
 $query_new_school_table = "CREATE TABLE IF NOT EXISTS `schools` (
@@ -71,6 +73,7 @@ $result_old_school->close();
 $result = $mysqli_new->query($querySchool) or die($mysqli_new->error.__LINE__);
 echo "Schools table inserted with data";?>
 <br>
+
 <?php
 
 
@@ -148,7 +151,8 @@ $result_old_teacher->close();
 
 
 $result = $mysqli_new->query($queryteacher) or die($mysqli_new->error.__LINE__);
-echo "Teachers table inserted with data";?><br><?php
+echo "Teachers table inserted with data";?><br>
+<?php
 
 
 
@@ -207,10 +211,11 @@ else {
 	echo 'NO RESULTS';
 }
 $result_old_sites->close();
-//echo $querysites;
+// echo $querysites;
 
 $result = $mysqli_new->query($querysites) or die($mysqli_new->error.__LINE__);
-echo "Sites table inserted with data";?><br><?php
+echo "Sites table inserted with data";?><br>
+<?php
 
 
 $query_new_teacher = "SELECT id,old_teacher_id FROM teachers";
@@ -280,7 +285,8 @@ $result_old_teachersclass->close();
 
 
 $result = $mysqli_new->query($queryteachersclass) or die($mysqli_new->error.__LINE__);
-echo "Teachers Class table inserted with data";?><br><?php
+echo "Teachers Class table inserted with data";?><br>
+<?php
 
 
 $query_new_sites = "SELECT id,site_id FROM sites";
@@ -343,7 +349,7 @@ if($result_old_arthro_hab->num_rows > 0) {
 		}
 
 		//Testing data that was present in database.
-		if($school == 130)
+		if($school == 132)
 			continue;
 
 		$queryhabitats = $queryhabitats."('AR',".$recording_date.",".$row['area'].",".$row['shrubcover'].",".$row['tree_canopy'].",".$row['lawn'].",".$row['other'].",".$row['paved_building'].",".$row['gravel_soil'].",".$water.",".$row['num_traps'].",'".$mysqli_old->real_escape_string($row['trap_arrange'])."',".$row['percent_observed'].",".$row['radius'].",".$site.",".$school.",".$date_entered.",".$row['habitat_id']."),";
@@ -357,11 +363,12 @@ else {
 	echo 'NO RESULTS';
 }
 $result_old_arthro_hab->close();
-//echo $queryhabitats;
+// echo $queryhabitats;
 
 
 $result = $mysqli_new->query($queryhabitats) or die($mysqli_new->error.__LINE__);
-echo "Habitats table inserted with data";?><br><?php
+echo "Habitats table inserted with data";?><br>
+<?php
 
 
 $query_new_arthro_taxon_table = "CREATE TABLE IF NOT EXISTS `arthro_taxon` (
@@ -401,7 +408,8 @@ $result_old_arthro_taxon->close();
 
 
 $result = $mysqli_new->query($queryarthro_taxon) or die($mysqli_new->error.__LINE__);
-echo "Arthro taxon table inserted with data";?><br><?php
+echo "Arthro taxon table inserted with data";?><br>
+<?php
 
 
 
@@ -482,7 +490,8 @@ $result_old_arthro_samples->close();
 
 
 $result = $mysqli_new->query($queryarthro_samples) or die($mysqli_new->error.__LINE__);
-echo "Arthro Samples table inserted with data";?><br><?php
+echo "Arthro Samples table inserted with data";?><br>
+<?php
 
 
 $query_new_arthroSamples = "SELECT id,old_sample_id FROM arthro_samples";
@@ -546,7 +555,8 @@ $result_old_arthro_specimens->close();
 
 
 $result = $mysqli_new->query($queryarthro_specimens) or die($mysqli_new->error.__LINE__);
-echo "Arthro Specimens table inserted with data";?><br><?php
+echo "Arthro Specimens table inserted with data";?><br>
+<?php
 
 
 
@@ -584,7 +594,7 @@ if($result_old_bird_hab->num_rows > 0) {
 		}
 
 		//Testing data that was present in database.
-		if($school == 130)
+		if($school == 132)
 			continue;
 
 		$queryhabitats = $queryhabitats."('BI',".$recording_date.",".$row['area'].",".$row['shrubcover'].",".$row['tree_canopy'].",".$row['lawn'].",".$row['other'].",".$row['paved_building'].",".$row['gravel_soil'].",".$water.",".$row['num_traps'].",".$row['trap_arrange'].",".$row['percent_observed'].",".$row['radius'].",".$site.",".$school.",".$date_entered.",".$row['habitat_id']."),";
@@ -602,7 +612,8 @@ $result_old_bird_hab->close();
 
 
 $result = $mysqli_new->query($queryhabitats) or die($mysqli_new->error.__LINE__);
-echo "Habitats table inserted with bird data";?><br><?php
+echo "Habitats table inserted with bird data";?><br>
+<?php
 
 
 
@@ -643,7 +654,8 @@ $result_old_bird_taxon->close();
 
 
 $result = $mysqli_new->query($querybird_taxon) or die($mysqli_new->error.__LINE__);
-echo "Bird taxon table inserted with data";?><br><?php
+echo "Bird taxon table inserted with data";?><br>
+<?php
 
 
 
@@ -681,7 +693,8 @@ $result_old_cloud_cover->close();
 
 
 $result = $mysqli_new->query($querycloud_cover) or die($mysqli_new->error.__LINE__);
-echo "Cloud Cover table inserted with data";?><br><?php
+echo "Cloud Cover table inserted with data";?><br>
+<?php
 
 
 
@@ -779,7 +792,8 @@ $result_old_bird_samples->close();
 
 
 $result = $mysqli_new->query($querybird_samples) or die($mysqli_new->error.__LINE__);
-echo "Bird Samples table inserted with data";?><br><?php
+echo "Bird Samples table inserted with data";?><br>
+<?php
 
 $query_new_birdSamples = "SELECT id,old_sample_id FROM bird_samples";
 $result_new_birdSamples= $mysqli_new->query($query_new_birdSamples) or die($mysqli_old->error.__LINE__);
@@ -847,7 +861,8 @@ $result_old_bird_specimens->close();
 
 
 $result = $mysqli_new->query($querybird_specimens) or die($mysqli_new->error.__LINE__);
-echo "Bird Specimens table inserted with data";?><br><?php
+echo "Bird Specimens table inserted with data";?><br>
+<?php
 
 
 $query_old_veg_hab = "SELECT * FROM vegetation_hab";
@@ -886,7 +901,7 @@ if($result_old_veg_hab->num_rows > 0) {
 		}
 
 		//Testing data that was present in database.
-		if($school == 130)
+		if($school == 132)
 			continue;
 
 		$queryhabitats = $queryhabitats."('VE',".$recording_date.",".$row['area'].",".$row['shrubcover'].",".$row['tree_canopy'].",".$row['lawn'].",".$row['other'].",".$row['paved_building'].",".$row['gravel_soil'].",".$water.",".$row['num_traps'].",".$row['trap_arrange'].",".$row['percent_observed'].",".$row['radius'].",".$site.",".$school.",".$date_entered.",".$row['habitat_id']."),";
@@ -904,7 +919,8 @@ $result_old_veg_hab->close();
 
 
 $result = $mysqli_new->query($queryhabitats) or die($mysqli_new->error.__LINE__);
-echo "Habitats table inserted with veg data";?><br><?php
+echo "Habitats table inserted with veg data";?><br>
+<?php
 
 
 
@@ -946,7 +962,8 @@ $result_old_veg_taxon->close();
 
 
 $result = $mysqli_new->query($querybird_taxon) or die($mysqli_new->error.__LINE__);
-echo "Veg taxon table inserted with data";?><br><?php
+echo "Veg taxon table inserted with data";?><br>
+<?php
 
 
 
@@ -1014,7 +1031,8 @@ $result_old_veg_samples->close();
 
 
 $result = $mysqli_new->query($queryveg_samples) or die($mysqli_new->error.__LINE__);
-echo "Veg Samples table inserted with data";?><br><?php
+echo "Veg Samples table inserted with data";?><br>
+<?php
 
 $query_new_vegSamples = "SELECT id,old_sample_id FROM veg_samples";
 $result_new_vegSamples= $mysqli_new->query($query_new_vegSamples) or die($mysqli_old->error.__LINE__);
@@ -1086,7 +1104,8 @@ $result_old_veg_specimens->close();
 
 
 $result = $mysqli_new->query($queryveg_specimens) or die($mysqli_new->error.__LINE__);
-echo "Veg Specimens table inserted with data";?><br><?php
+echo "Veg Specimens table inserted with data";?><br>
+<?php
 
 
 
@@ -1142,7 +1161,8 @@ $result_old_bruchid_samples->close();
 
 
 $result = $mysqli_new->query($querybruchid_samples) or die($mysqli_new->error.__LINE__);
-echo "Bruchid Samples table inserted with data";?><br><?php
+echo "Bruchid Samples table inserted with data";?><br>
+<?php
 
 
 
@@ -1198,7 +1218,8 @@ $result_old_bruchid_specimens->close();
 
 
 $result = $mysqli_new->query($querybruchid_specimens) or die($mysqli_new->error.__LINE__);
-echo "Bruchid Specimens table inserted with data";?><br><?php
+echo "Bruchid Specimens table inserted with data";?><br>
+<?php
 
 $query_new_alter_teachers= "ALTER TABLE teachers DROP old_teacher_id;";
 $result = $mysqli_new->query($query_new_alter_teachers) or die($mysqli_new->error.__LINE__);
@@ -1221,7 +1242,8 @@ $result = $mysqli_new->query($query_new_alter_habitat) or die($mysqli_new->error
 $query_new_alter_teachers_classes= "ALTER TABLE teachers_classes DROP old_class_id;";
 $result = $mysqli_new->query($query_new_alter_teachers_classes) or die($mysqli_new->error.__LINE__);
 
-echo "Successully removed old database columns in new database";?><br><?php
+echo "Successully removed old database columns in new database";?><br>
+<?php
 
 // CLOSE CONNECTION
 mysqli_close($mysqli_new);

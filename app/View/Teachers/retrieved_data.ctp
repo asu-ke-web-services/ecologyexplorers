@@ -1,8 +1,3 @@
-<html>
-
-
-<br>
-<body>
 	<div>
 		<?php echo $this->element('links'); ?>
 	</div>
@@ -15,31 +10,13 @@ echo $this->Html->getCrumbs(' > ', array(
 ));
 ?>
 
-	<p>Congratulations - your query worked !!</p>
-	<br>
+	<p>Congratulations - your data is ready!</p>
 	<p>
 		<?php
-		echo $this->Html->image('downloadData.png', array('width'=>'150px'));
-		echo $this->Html->link('To Save Data,Click Here',array('controller'=>'teachers','action'=>'export'), array('target'=>'_blank'));
+  echo $this->Html->link($this->Html->image('downloadData.png', array('width'=>'150px', 'alt'=>'download')).'Download',
+      array('controller'=>'teachers','action'=>'export'), array('target'=>'_blank', 'escape'=>false));
 		?></p>
 	<br>
-	<p>
-		To Download Data... <br> (Warning! This may take a while if you have a
-		large file!)
-	</p>
 
-	<p>
-		<b> If you use a PC</b> Click on the To Save Data, Click Here link. <br> Or right click on the To Save Data, Click Here link
-		and choose choose "Save Target As" . Save the file on your computer
-		or on a disk.
-	</p>
-	<p>
-		<b>If you use a Mac</b> Click on the To Save Data, Click Here link.<br> Right click (or press the Control button while
-		clicking) on the Save Data. Click here icon and choose "save link as"
-		(in Netscape) or "Save Target As" (in Internet Explorer). Save the file on your computer or on a disk.
-	</p>
 
-	<p><br> Once the file has been saved, open up the file in your spreadsheet program (i.e.
-		EXCEL).</p>
-</body>
-</html>
+	<p> The data will be downloaded as a CSV file which can be imported directly into your spreadsheet program (i.e. EXCEL).  </p>

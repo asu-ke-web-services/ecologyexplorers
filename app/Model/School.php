@@ -60,8 +60,8 @@ class School extends AppModel {
 	{
 		$school = $this->find('list', array(
 				'fields' => array(
-						'Schools.id',
-						'Schools.school_Name')));
+						'id',
+						'school_Name')));
 
 		return $school;
 	}
@@ -92,8 +92,8 @@ class School extends AppModel {
 		{
 			$conditions = array('Schools.id' => $schoolID);
 			$temp = $this->find('first', array('conditions' => $conditions,'fields' => array(
-					'Schools.id',
-					'Schools.school_name')));
+					'id',
+					'school_name')));
 
 			$schooloptions[0]['value'] = $temp['School']['id'];
 			$schooloptions[0]['name'] = $temp['School']['school_name'];

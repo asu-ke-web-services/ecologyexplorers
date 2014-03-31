@@ -26,6 +26,7 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/ecoexplorersdata/', array('controller' => 'pages', 'action' => 'display', 'home')); // because of old links using this as the home page 
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

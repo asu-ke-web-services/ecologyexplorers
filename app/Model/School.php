@@ -90,7 +90,7 @@ class School extends AppModel {
 		$temp['id'] = $schoolID;
 		if($this->hasAny($temp))
 		{
-			$conditions = array('Schools.id' => $schoolID);
+			$conditions = array('id' => $schoolID);
 			$temp = $this->find('first', array('conditions' => $conditions,'fields' => array(
 					'id',
 					'school_name')));
@@ -139,7 +139,7 @@ class School extends AppModel {
 		$endDate=$dataConditions['end_date'];
 		$schoolID=$dataConditions['school_id'];
 
-		$conditionsSchool = array('Schools.id' => $schoolID);
+		$conditionsSchool = array('id' => $schoolID);
 		$conditionsProtocol = array('Habitat.type' => $protocol);
 
 		if($protocol == 'BI')
@@ -148,7 +148,7 @@ class School extends AppModel {
 			$conditionsDate = array('BirdSample.collection_date between ? and ?' => array($startDate, $endDate));
 
 			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.radius','Habitat.percent_observed','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other','Habitat.water');
-			$fieldsSchool = array('Schools.school_name','Schools.city','Schools.zipcode');
+			$fieldsSchool = array('school_name','city','zipcode');
 			$fieldsBirdSample = array('BirdSample.time_start','BirdSample.time_end','BirdSample.collection_date','BirdSample.air_temp','BirdSample.comments');
 			$fieldsTeachersClass = array('TeachersClass.class_name');
 			$fieldsBirdSpecimen = array('BirdSpecimen.frequency');
@@ -229,7 +229,7 @@ class School extends AppModel {
 			$conditionsDate = array('ArthroSample.collection_date between ? and ?' => array($startDate, $endDate));
 
 			$fieldsHabitat= array('Habitat.type','Habitat.recording_date','Habitat.area','Habitat.num_traps','Habitat.trap_arrange','Habitat.tree_canopy','Habitat.shrubcover','Habitat.gravel_soil','Habitat.lawn','Habitat.paved_building','Habitat.other','Habitat.water');
-			$fieldsSchool = array('Schools.school_name','Schools.city','Schools.zipcode');
+			$fieldsSchool = array('school_name','city','zipcode');
 			$fieldsArthroSample = array('ArthroSample.collection_date','ArthroSample.comments');
 			$fieldsTeachersClass = array('TeachersClass.class_name');
 			$fieldsArthroSpecimen = array('ArthroSpecimen.frequency','ArthroSpecimen.trap_no');

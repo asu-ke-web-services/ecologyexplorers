@@ -51,21 +51,32 @@
 			<th>Tally Number</th>
 		</tr>
 
-		<?php for($i=0;$i<20;$i++) {?>
-
-		<tr>
-			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'trap_no',array('label' => ''))?>
-			</td>
-			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $orderOptions))?>
-			</td>
-			<td><?php echo $this->Form->input('ArthroSpecimen'.$i.'frequency',array('type' =>'select','label' => '', 'options' => range(0, 100)))?>
-			
-			</td>
-		</tr>
-
+		<?php foreach(range(0,60) as $i) { ?>
+      <?php if($i == 31) { ?>
+        <tr>
+          <td colspan=3>
+            <a href="#more" class="show_more_button">Add more inputs</a> 
+            <a name="more"/>
+          </td>
+        </tr>
+      <?php } ?>
+      <tr <?php if($i > 30) echo 'class="show_more"'; ?>>
+        <td><?php echo $this->Form->input('ArthroSpecimen'.$i.'trap_no',array('label' => ''))?> </td>
+        <td><?php echo $this->Form->input('ArthroSpecimen'.$i.'taxon',array('label' => '','empty' => 'Select','options' => $orderOptions))?> </td>
+        <td><?php echo $this->Form->input('ArthroSpecimen'.$i.'frequency',array('type' =>'select','label' => '', 'options' => range(0, 100)))?></td>
+      </tr>
 		<?php }?>
 	</table>
 </div>
 
+  <script>
+  $(document).ready(function() {
+    $('.show_more').hide(); 
+    $('.show_more_button').on('click', function() { 
+      $('.show_more').show(); 
+      $('.show_more_button').hide(); 
+     });
+  });
+  </script>
 <p><b>Please double check your entries before you click Submit.</b></p>
 <?php echo $this->Form->end('Submit Arthropod Data',array('div'=>'submit')); ?>

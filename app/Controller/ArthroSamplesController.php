@@ -46,8 +46,8 @@ class ArthroSamplesController extends AppController {
 		//Prepopulating the arthrotaxon drop down box with the values retrieved from DB.
 		$this->set('orderOptions',  ClassRegistry::init('ArthroTaxon')->getOrderList());
 		
-		$dataOptions = array(array('name' => '5','value' => '5'),array('name' => '10','value' => '10'),array('name' => '15','value' => '15'),array('name' => '20','value' => '20'));
-		$this->set('dataOptions', $dataOptions);
+		#$dataOptions = array(array('name' => '5','value' => '5'),array('name' => '10','value' => '10'),array('name' => '15','value' => '15'),array('name' => '20','value' => '20'));
+		#$this->set('dataOptions', $dataOptions);
 
 		if ($this->request->is('post'))
 		{

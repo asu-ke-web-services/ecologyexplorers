@@ -25,7 +25,6 @@ App::uses('Controller', 'Controller');
 Configure::write('adminEmailAddress',array('email'=>'Ecology.Explorers@asu.edu','name' => 'Ecology Explorers'));
 Configure::write('fromEmailAddress',array('email'=>'Ecology.Explorers@asu.edu','name' => 'Ecology Explorers'));
 
-
 /**
  * Application Controller
  *

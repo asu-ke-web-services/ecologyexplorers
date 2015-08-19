@@ -61,7 +61,9 @@ class School extends AppModel {
 		$school = $this->find('list', array(
 				'fields' => array(
 						'id',
-						'school_Name')));
+						'school_Name'),
+				'order' => 'school_Name asc'
+				));
 
 		return $school;
 	}
